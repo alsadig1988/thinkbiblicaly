@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأملات لاهوتية | الإيمان يبحث عن الفهم</title>
+    <!-- Import Amiri for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Base Variables & Reset */
+        :root {
+            /* Light Theme (Default) */
+            --primary-color: #2c3e50;
+            /* Deep Blue/Grey */
+            --secondary-color: #8e44ad;
+            /* Muted Purple */
+            --accent-color: #d35400;
+            /* Burnt Orange */
+            --bg-color: #fcfbf9;
+            /* Warm White/Paper */
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --light-text: #7f8c8d;
+            --border-color: #e0e0e0;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --modal-overlay: rgba(0, 0, 0, 0.5);
+
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-arabic: 'Amiri', serif;
+            /* Arabic Font */
+            --spacing-unit: 1rem;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --primary-color: #ecf0f1;
+            --secondary-color: #a569bd;
+            --accent-color: #e67e22;
+            --bg-color: #1a1a1a;
+            --card-bg: #2c2c2c;
+            --text-color: #e0e0e0;
+            --light-text: #a0a0a0;
+            --border-color: #444444;
+            --nav-bg: rgba(44, 44, 44, 0.85);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --modal-overlay: rgba(0, 0, 0, 0.7);
+        }
+
+        /* RTL/Arabic Overrides */
+        [dir="rtl"] {
+            font-family: var(--font-arabic);
+        }
+
+        [dir="rtl"] h1,
+        [dir="rtl"] h2,
+        [dir="rtl"] h3 {
+            font-family: var(--font-arabic);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5em;
+        }
+
+        /* Modern Navigation (Glassmorphism) */
+        nav {
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        [dir="rtl"] .nav-brand {
+            font-family: var(--font-arabic);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            /* Logical properties for gap are supported in modern browsers, but flex-direction handles RTL automatically */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        [dir="rtl"] .nav-links a {
+            font-family: var(--font-arabic);
+            font-weight: 700;
+            /* Amiri needs slightly more weight */
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            /* Logical equivalent would be complex without extra div, but left:0 works if text aligns */
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        [dir="rtl"] .nav-links a::after {
+            left: auto;
+            right: 0;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            /* Use logical border */
+            border-inline-start: 1px solid var(--border-color);
+            padding-inline-start: 1.5rem;
+        }
+
+        button.icon-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            font-family: var(--font-sans);
+            /* Keep language code in sans */
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        button.icon-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        header.hero {
+            position: relative;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.95) 0%, rgba(44, 62, 80, 0.7) 100%), url('https://images.unsplash.com/photo-1507842217153-e21f2010dc6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            padding: 0 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+            max-width: 800px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.6;
+        }
+
+        [dir="rtl"] .hero p {
+            font-family: var(--font-arabic);
+            font-size: 1.6rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Filter Section */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .search-bar input {
+            padding: 0.8rem 1rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            width: 300px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        [dir="rtl"] .search-bar input {
+            text-align: right;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .categories {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-filter {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        [dir="rtl"] .btn-filter {
+            font-family: var(--font-arabic);
+        }
+
+        .btn-filter.active,
+        .btn-filter:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.5s ease-out backwards;
+            text-align: start;
+            /* Adapts to RTL automaticallly */
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+            border-color: var(--secondary-color);
+        }
+
+        .card-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        [dir="rtl"] .card-meta {
+            font-family: var(--font-arabic);
+            letter-spacing: 0;
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .card-author {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .card-excerpt {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            opacity: 0.9;
+        }
+
+        .btn-read-more {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            font-size: 0.95rem;
+            align-self: flex-start;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        [dir="rtl"] .btn-read-more {
+            flex-direction: row-reverse;
+            /* Flip arrow */
+            font-family: var(--font-arabic);
+        }
+
+        /* Specific rotation for the arrow in RTL */
+        [dir="rtl"] .btn-read-more .arrow {
+            transform: rotate(180deg);
+        }
+
+        .btn-read-more:hover {
+            color: var(--primary-color);
+            gap: 0.8rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            padding: 3rem;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            text-align: start;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 1.5rem;
+            /* Logical properties for position are not fully standard in simple properties, so we use overrides */
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        [dir="rtl"] .btn-close {
+            right: auto;
+            left: 1.5rem;
+        }
+
+        .btn-close:hover {
+            color: var(--accent-color);
+        }
+
+        .modal-body {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            font-family: var(--font-serif);
+            color: var(--text-color);
+        }
+
+        [dir="rtl"] .modal-body {
+            font-family: var(--font-arabic);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .modal-meta {
+            color: var(--light-text);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        [dir="rtl"] footer p {
+            font-family: var(--font-arabic);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 5rem 1rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+
+            /* Mobile Nav */
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 10px var(--shadow-color);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                color: var(--text-color);
+                cursor: pointer;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+            <span data-i18n="nav_brand">Think Biblically</span>
+        </a>
+
+        <div class="nav-right">
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="TheologicalBlog.html" data-i18n="nav_home">Home</a></li>
+                <li><a href="articles.html" data-i18n="nav_articles">Articles</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
+                <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+                <li><a href="faith-statement.html" data-i18n="nav_faith_statement">Faith Statement</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="lang-toggle" title="Switch Language">
+                    LA
+                </button>
+                <button class="icon-btn" id="theme-toggle" title="Toggle Dark Mode">
+                    🌙
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1 data-i18n="hero_title_faith">Faith Statement</h1>
+        <p data-i18n="hero_subtitle_faith">What we believe.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="card-content"
+            style="background: var(--card-bg); border-radius: 12px; padding: 3rem; margin-bottom: 4rem; box-shadow: 0 4px 6px var(--shadow-color); border: 1px solid var(--border-color);">
+            <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;"
+                data-i18n="faith_main_title">
+                Statement of Faith</h2>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--secondary-color);" data-i18n="faith_1_title">1. The Scriptures</h3>
+                <p data-i18n="faith_1_text">We believe the Bible to be the inspired, the only infallible, authoritative
+                    Word of God.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--secondary-color);" data-i18n="faith_2_title">2. The Trinity</h3>
+                <p data-i18n="faith_2_text">We believe that there is one God, eternally existent in three persons:
+                    Father, Son, and Holy Spirit.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--secondary-color);" data-i18n="faith_3_title">3. Christ</h3>
+                <p data-i18n="faith_3_text">We believe in the deity of our Lord Jesus Christ, in His virgin birth, in
+                    His sinless life, in His
+                    miracles, in His vicarious and atoning death through His shed blood, in His bodily resurrection, in
+                    His ascension to the right hand of the Father, and in His personal return in power and glory.</p>
+            </div>
+
+            <div>
+                <h3 style="color: var(--secondary-color);" data-i18n="faith_4_title">4. Salvation</h3>
+                <p data-i18n="faith_4_text">We believe that for the salvation of lost and sinful people, regeneration by
+                    the Holy Spirit is
+                    absolutely essential.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="article-modal">
+        <div class="modal-content">
+            <button class="btn-close" id="modal-close">&times;</button>
+            <div id="modal-body-content">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p data-i18n="footer_text">&copy; 2024 Think Biblically. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                nav_brand: "Theological Reflections",
+                nav_home: "Home",
+                nav_articles: "Articles",
+                nav_about: "About",
+                nav_contact: "Contact",
+                hero_title: "Theological Reflections",
+                hero_subtitle: "\"Faith seeking understanding.\" - St. Anselm",
+                filter_all: "All",
+                search_placeholder: "Search articles...",
+                read_more: "Read More",
+                footer_text: "© 2024 Think Biblically. All rights reserved.",
+                dir: "ltr",
+                by: "By",
+                published: "Published on",
+                nav_faith_statement: "Faith Statement",
+                hero_title_faith: "Faith Statement",
+                hero_subtitle_faith: "What we believe.",
+                faith_main_title: "Statement of Faith",
+                faith_1_title: "1. The Scriptures",
+                faith_1_text: "We believe the Bible to be the inspired, the only infallible, authoritative Word of God.",
+                faith_2_title: "2. The Trinity",
+                faith_2_text: "We believe that there is one God, eternally existent in three persons: Father, Son, and Holy Spirit.",
+                faith_3_title: "3. Christ",
+                faith_3_text: "We believe in the deity of our Lord Jesus Christ, in His virgin birth, in His sinless life, in His miracles, in His vicarious and atoning death through His shed blood, in His bodily resurrection, in His ascension to the right hand of the Father, and in His personal return in power and glory.",
+                faith_4_title: "4. Salvation",
+                faith_4_text: "We believe that for the salvation of lost and sinful people, regeneration by the Holy Spirit is absolutely essential."
+            },
+
+            ar: {
+                nav_brand: "تأملات لاهوتية",
+                nav_home: "الرئيسية",
+                nav_articles: "المقالات",
+                nav_about: "من نحن",
+                nav_contact: "اتصل بنا",
+                nav_faith_statement: "بيان الإيمان",
+                hero_title: "تأملات لاهوتية",
+                hero_subtitle: "\"الإيمان يبحث عن الفهم.\" - القديس أنسلم",
+                filter_all: "الكل",
+                search_placeholder: "ابحث في المقالات...",
+                read_more: "اقرأ المزيد",
+                footer_text: "© 2024 تأملات لاهوتية. جميع الحقوق محفوظة.",
+                dir: "rtl",
+                by: "بقلم",
+                published: "نشر في",
+                hero_title_faith: "بيان الإيمان",
+                hero_subtitle_faith: "ما نؤمن به.",
+                faith_main_title: "بيان الإيمان",
+                faith_1_title: "1. الكتب المقدسة",
+                faith_1_text: "نؤمن أن الكتاب المقدس هو كلمة الله الموحى بها، والمعصومة من الخطأ، وذات السلطان الوحيد.",
+                faith_2_title: "2. الثالوث",
+                faith_2_text: "نؤمن بوجود إله واحد، موجود أزلياً في ثلاثة أقانيم: الآب والابن والروح القدس.",
+                faith_3_title: "3. المسيح",
+                faith_3_text: "نؤمن بألوهية ربنا يسوع المسيح، وبولادته العذراوية، وبحياته الخالية من الخطية، وبمعجزاته، وبموته الفدائي والكفاري من خلال دمه المسفوك، وبقيامته الجسدية، وبصعوده إلى يمين الآب، وبعودته الشخصية بقوة ومجد.",
+                faith_4_title: "4. الخلاص",
+                faith_4_text: "نؤمن أنه لخلاص الناس الضالين والخطاة، فإن التجديد بالروح القدس ضروري للغاية."
+            }
+        };
+
+        // Current State (Order: en -> la -> ar)
+        let currentLang = 'ar';
+
+        // Data containing articles
+        const articles = [
+            {
+                id: 1,
+                title: "ميلاديات ",
+                title_ar: "حين اخترق الأبديُّ تقويمَ البشر",
+                author: "الصادق شريف",
+                date: "October 14, 2024",
+                category: "اللاهوت النظامي",
+                excerpt: "التاريخ، الذي اعتاد أن يُكتب بدم السيوف وأسماء الأباطرة، وجد نفسه فجأةً يعيد ترتيب سطوره حول مذود صغير، في قرية لا تُغري الجغرافيين ولا تثير شهية المؤرخين. ",
+                excerpt_ar: "",
+                content: `
+                    <p>ميلاد المسيح لم يكن حادثةً عابرة في سجلّ الأيام، ولا قصةً تُروى لتدفئة الشتاء الروحي. كان كسرًا هادئًا لجدار الزمن. لحظةً انحنى فيها المطلق ليدخل المحدود، لا كفكرة، بل كجسدٍ يتنفّس ويبكي ويُلفّ بقماط. التاريخ، الذي اعتاد أن يُكتب بدم السيوف وأسماء الأباطرة، وجد نفسه فجأةً يعيد ترتيب سطوره حول مذود صغير، في قرية لا تُغري الجغرافيين ولا تثير شهية المؤرخين.
+</p>
+                    <p>اللافت ليس فقط أن الله صار إنسانًا، بل كيف صار. بلا موكب. بلا ضجيج. بلا مفاوضات مع السلطة. جاء ضعيفًا بما يكفي ليُحتضن، قويًا بما يكفي ليُغيّر معنى القوة نفسها. الملائكة غنّوا، نعم، لكن السامعين كانوا رعاة، أولئك الذين يقفون دائمًا على هامش المشهد. كأن السماء كانت تقول منذ البداية: القصة هذه المرة ليست للنخبة.
+في ميلاده، لم يأتِ المسيح ليُضيف فصلًا جديدًا إلى كتب الدين، بل ليقلب طريقة القراءة. لم يأتِ ليشرح الله، بل ليُريه. “والكلمة صار جسدًا” ليست جملة شعرية، بل زلزالًا لاهوتيًا: الله لم يعد فكرةً تُناقَش، بل حياةً تُعاش. ومنذ تلك الليلة، لم يعد السؤال: أين الله؟ بل: كيف نعيش وقد اقترب الله إلى هذا الحد؟
+</p>
+                    <p>منذ ذلك المذود، تغيّر اتجاه التاريخ. صار الضعفاء مرئيين. صار الحب قوةً لا تُقاس بعدد الجيوش. وصار الرجاء ممكنًا، لا لأنه سهل، بل لأنه وُلد في أصعب الظروف، تحت احتلال، وفي فقر، وفي عالم لا ينتظر معجزة.
+</p>
+                    <h2>وُلِدَ… ليَحملَ الصَّليب </h2>
+                    <p>ميلادُ المسيح لا يُفهم حقًا إذا عُزل عن نهايته الظاهرة، ولا الصليب يُحتمل إن نُسيَت بدايته. المذود لم يكن قوسًا زخرفيًا يسبق القصة، بل كان أول ظلٍّ للصليب. الخشب هناك، والخشب هنا. فرق الارتفاع فقط. في بيت لحم انخفض الله إلى مستوى الإنسان، وعلى الجلجثة انخفض أكثر… إلى عمق الموت نفسه</p>
+                    <p> حين وُلد، لم يكن يبحث عن تعاطفنا، بل كان قد قرر المواجهة. الجسد الذي اتخذه لم يكن مؤقتًا ولا رمزيًا، بل أداة خلاص. لحمًا يمكن أن يُجرَح. دمًا يمكن أن يُسفَك. منذ الليلة الأولى كان الاتجاه واحدًا: نحو الصليب. لهذا لا تبدو الهدايا الذهب واللبان والمر غريبة؛ المرّ خصوصًا، كأن التاريخ كان يهمس مبكرًا: هذا الطفل ذاهب إلى الألم، لا هروبًا منه بل دخولًا واعيًا إليه.
+</p>
+                    <p>المذود أعلن معنى الله، والصليب كشف عمقه. في الميلاد نرى تواضع الله، وفي الصليب نرى ثمن هذا التواضع. لم يأتِ المسيح ليعلّم البشر كيف يصعدون إلى السماء، بل ليحمل السماء إلى قاع سقوطهم. الطفل الضعيف هو نفسه الرجل المصلوب، ولا تناقض هنا؛ هذا هو المنطق الإلهي الذي يربك العقل: القوة تختبئ في الضعف، والمجد يُعلَّق على خشبة.
+</p>
+                    <p>منذ البداية كان الصليب حاضرًا، لا كحدث طارئ، بل كقصد. “ولانه نحن بعدُ خطاة مات المسيح لأجلنا”؛ أي أن الميلاد لم يكن استجابة لتحسّن البشر، بل لكسرتهم. وُلد لأن الصليب كان ضروريًا، وصُلِب لأن الميلاد كان حقيقيًا. لو لم يكن إنسانًا حقًا لما تألم، ولو لم يكن الله حقًا لما خلّص. لهذا، حين نحتفل بميلاده، لا نزيّن ذكرى جميلة فقط. نحن نلمس قرارًا إلهيًا لا رجعة فيه: الله اختار أن يدخل قصتنا حتى نهايتها المؤلمة، ليكتب نهايةً جديدة. الميلاد هو “نعم” الله للعالم، والصليب هو “نعم” الله حتى عندما يرفضه العالم.  ميلادٌ يحمل في دفئه معنى الصليب، وصليبٌ يفيض بقيامة الرجاء. 
+</p>
+                    
+                `
+            },
+            {
+                id: 2,
+                title: "Understanding Biblical Hermeneutics",
+                title_la: "Intellectus Hermeneuticae Biblicae",
+                title_ar: "فهم التأويل الكتابي",
+                author: "Rev. Michael Thorne",
+                date: "September 22, 2024",
+                category: "Biblical Studies",
+                excerpt: "A guide to the principles of interpretation that bridge the gap between ancient texts and modern contexts.",
+                excerpt_la: "Dux ad principia interpretationis quae pontem faciunt inter textus antiquos et contextus hodiernos.",
+                excerpt_ar: "دليل لمبادئ التفسير التي تجسر الفجوة بين النصوص القديمة والسياقات الحديثة.",
+                content: `
+                    <p>Hermeneutics, the science and art of interpretation, is crucial for anyone seeking to understand the Bible seriously.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Faith and Reason",
+                title_la: "Fides et Ratio",
+                title_ar: "الإيمان والعقل",
+                author: "Sarah Jenkins, PhD",
+                date: "November 05, 2024",
+                category: "Philosophy of Religion",
+                excerpt: "Examining the historical dialogue between intellectual inquiry and religious conviction.",
+                excerpt_la: "Examinans dialogum historicum inter inquisitionem intellectualem et convictionem religiosam.",
+                excerpt_ar: "فحص الحوار التاريخي بين البحث الفكري والقناعة الدينية.",
+                content: `
+                    <p>Are faith and reason enemies, strangers, or partners? This question has echoed through the halls of academia and the nave of the church for centuries.</p>
+                `
+            },
+            {
+                id: 4,
+                title: "The Early Church Fathers",
+                title_la: "Patres Ecclesiae Antiquae",
+                title_ar: "آباء الكنيسة الأوائل",
+                author: "Marcus Aurelius II",
+                date: "August 30, 2024",
+                category: "Church History",
+                excerpt: "Why the voices of the first five centuries are vital for the vitality of the modern church.",
+                excerpt_la: "Cur voces quinque primorum saeculorum vitales sint pro vitalitate ecclesiae hodiernae.",
+                excerpt_ar: "لماذا تعتبر أصوات القرون الخمسة الأولى حيوية لحيوية الكنيسة الحديثة.",
+                content: `
+                    <p>It is easy to think that Christianity began with us, or perhaps at the Reformation. But the "Age of the Fathers" (Patristics) laid the very foundations of the doctrinal structures we inhabit today.</p>
+                `
+            },
+            {
+                id: 5,
+                title: "Ethics in a Digital Age",
+                title_la: "Ethica in Aetate Digitali",
+                title_ar: "الأخلاق في العصر الرقمي",
+                author: "Caleb Stone",
+                date: "December 01, 2024",
+                category: "Ethics",
+                excerpt: "Navigating the moral complexities of social media, AI, and digital presence from a Christian perspective.",
+                excerpt_la: "Navigans moralitates complexitates instrumentorum socialium, AI, et praesentiae digitalis ex prospectu Christiano.",
+                excerpt_ar: "استكشاف التعقيدات الأخلاقية لوسائل التواصل الاجتماعي والذكاء الاصطناعي من منظور مسيحي.",
+                content: `
+                    <p>Technology is never neutral. It shapes us as much as we shape it. In a digital age where attention is the currency, the Christian virtue of prudence is more needed than ever.</p>
+                `
+            },
+            {
+                id: 6,
+                title: "Liturgical Time",
+                title_la: "Tempus Liturgicum",
+                title_ar: "الزمن الليتورجي",
+                author: "Sr. Mary Claire",
+                date: "November 28, 2024",
+                category: "Systematic Theology",
+                excerpt: "How the church calendar shapes our experience of time and reality against the secular clock.",
+                excerpt_la: "Quomodo calendarium ecclesiae format experientiam nostram temporis et realitatis contra horologium saeculare.",
+                excerpt_ar: "كيف يشكل تقويم الكنيسة تجربتنا للوقت والواقع في مواجهة الساعة العلمانية.",
+                content: `
+                    <p>The secular world measures time in quarters, fiscal years, and deadlines. It is linear, often rushing towards an exhausted end. The Church, however, lives in liturgical time—a cyclical rhythm that centers our existence on the life of Christ.</p>
+                `
+            }
+        ];
+
+        // Unique categories for filters
+        const categories = [...new Set(articles.map(a => a.category))];
+
+        // DOM Elements
+        const grid = document.getElementById('blog-grid');
+        const searchInput = document.getElementById('search-input');
+        const filterContainer = document.getElementById('category-filters');
+        const modal = document.getElementById('article-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalBody = document.getElementById('modal-body-content');
+
+        // Toggle Elements
+        const themeBtn = document.getElementById('theme-toggle');
+        const langBtn = document.getElementById('lang-toggle');
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        // Functions
+        function init() {
+            // Check for saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = '☀️';
+            }
+
+            updateLanguageUI();
+            setupEventListeners();
+        }
+
+        function getLocalizedContent(article) {
+            if (currentLang === 'la') {
+                return {
+                    title: article.title_la || article.title,
+                    excerpt: article.excerpt_la || article.excerpt,
+                    content: article.content // Fallback to EN for content in demo
+                };
+            } else if (currentLang === 'ar') {
+                return {
+                    title: article.title_ar || article.title,
+                    excerpt: article.excerpt_ar || article.excerpt,
+                    content: article.content // Fallback to EN for content in demo
+                };
+            }
+            return {
+                title: article.title,
+                excerpt: article.excerpt,
+                content: article.content
+            };
+        }
+
+        function updateLanguageUI() {
+            const langData = translations[currentLang];
+
+            // Set Direction
+            document.documentElement.dir = langData.dir;
+            document.documentElement.lang = currentLang;
+
+            // Update static elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (langData[key]) {
+                    el.textContent = langData[key];
+                }
+            });
+
+            // Update placeholder
+            searchInput.placeholder = langData.search_placeholder;
+
+            // Update button text
+            langBtn.textContent = currentLang.toUpperCase();
+
+            // Re-render articles to update their text & layout
+            // filterArticles();
+        }
+
+        function renderFilters() {
+            // Retrieve existing filters first if needed, but here we just rebuild
+            filterContainer.innerHTML = `<button class="btn-filter active" data-filter="all" data-i18n="filter_all">${translations[currentLang].filter_all}</button>`;
+
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-filter';
+                btn.dataset.filter = cat;
+                btn.textContent = cat; // Categories could also be translated if mapped
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function renderArticles(articlesToRender) {
+            grid.innerHTML = '';
+
+            if (articlesToRender.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--light-text);">No articles found matching your criteria.</p>';
+                return;
+            }
+
+            articlesToRender.forEach((article, index) => {
+                const card = document.createElement('article');
+                card.className = 'article-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                const loc = getLocalizedContent(article);
+
+                card.innerHTML = `
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>${article.category}</span> &bull; <span>${article.date}</span>
+                        </div>
+                        <h2 class="card-title">${loc.title}</h2>
+                        <div class="card-author">${translations[currentLang].by} ${article.author}</div>
+                        <p class="card-excerpt">${loc.excerpt}</p>
+                        <button class="btn-read-more" onclick="openModal(${article.id})">
+                            ${translations[currentLang].read_more} <span class="arrow">&rarr;</span>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterArticles() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeFilterBtn = document.querySelector('.btn-filter.active');
+            const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
+
+            const filtered = articles.filter(article => {
+                const loc = getLocalizedContent(article);
+                const title = loc.title.toLowerCase();
+                const content = loc.content.toLowerCase();
+
+                const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
+                const matchesCategory = activeFilter === 'all' || article.category === activeFilter;
+
+                return matchesSearch && matchesCategory;
+            });
+
+            renderArticles(filtered);
+        }
+
+        // Modal Logic
+        window.openModal = function (id) {
+            const article = articles.find(a => a.id === id);
+            if (!article) return;
+
+            const loc = getLocalizedContent(article);
+
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <div class="card-meta">${article.category}</div>
+                    <h1>${loc.title}</h1>
+                    <div class="modal-meta">
+                        ${translations[currentLang].by} ${article.author} | ${translations[currentLang].published} ${article.date}
+                    </div>
+                </div>
+                <div class="modal-body">
+                    ${loc.content}
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        };
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function toggleTheme() {
+            const root = document.documentElement;
+            if (root.getAttribute('data-theme') === 'dark') {
+                root.removeAttribute('data-theme');
+                themeBtn.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                root.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function toggleLanguage() {
+            // Cycle: EN -> AR -> EN
+            if (currentLang === 'en') {
+                currentLang = 'ar';
+            } else {
+                currentLang = 'en';
+            }
+
+            renderFilters();
+            updateLanguageUI();
+        }
+
+        function setupEventListeners() {
+            // Theme Toggle
+            themeBtn.addEventListener('click', toggleTheme);
+
+            // Language Toggle
+            langBtn.addEventListener('click', toggleLanguage);
+
+            // Mobile Menu
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Modal Close
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+            });
+        }
+
+        // Initialize
+        init();
+
+    </script>
+</body>
+
+</html>
